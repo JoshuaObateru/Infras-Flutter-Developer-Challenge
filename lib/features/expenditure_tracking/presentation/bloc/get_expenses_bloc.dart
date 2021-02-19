@@ -24,7 +24,13 @@ class GetExpensesBloc extends Bloc<GetExpensesEvent, GetExpensesState> {
       yield GetExpensesLoading();
       final result = await getExpensesUseCase();
       yield result.fold((error) => GetExpensesError(message: error.message),
-          (response) => GetExpensesLoaded(expenses: response));
+          (response) {
+        final count = (response as List<ExpenseModel>)
+            .map((e) => e.amount)
+            .reduce((value, element) => value + element);
+        return GetExpensesLoaded(
+            response: {"expense": response, "amount": count});
+      });
     }
   }
 }

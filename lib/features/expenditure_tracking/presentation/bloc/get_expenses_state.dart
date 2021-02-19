@@ -12,13 +12,14 @@ class GetExpensesInitial extends GetExpensesState {}
 class GetExpensesLoading extends GetExpensesState {}
 
 class GetExpensesLoaded extends GetExpensesState {
-  final List<ExpenseModel> expenses;
+  // final List<ExpenseModel> expenses;
+  final Map<String, dynamic> response;
   const GetExpensesLoaded({
-    this.expenses,
+    this.response,
   });
   @override
   List<Object> get props => [
-        expenses,
+        response,
       ];
 }
 

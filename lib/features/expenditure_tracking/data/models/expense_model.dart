@@ -17,8 +17,7 @@ class ExpenseModel {
       _$ExpenseModelFromJson(json);
   Map<String, dynamic> toJson() => _$ExpenseModelToJson(this);
 
-  static List<ExpenseModel> expenseModelsParser(String response) =>
-      List.from(jsonDecode(response)['data'])
-          .map((token) => ExpenseModel.fromJson(token))
-          .toList();
+  static List<ExpenseModel> expenseModelsParser(
+          List<Map<String, dynamic>> response) =>
+      response.map((token) => ExpenseModel.fromJson(token)).toList();
 }

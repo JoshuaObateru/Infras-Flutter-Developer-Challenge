@@ -46,20 +46,32 @@ class _ViewExpensesState extends State<ViewExpenses> {
             } else if (state is GetExpensesLoaded) {
               return ListView.separated(
                   itemBuilder: (context, index) {
-                    var f = NumberFormat("#,##0.00", 'en_US');
-                    var date =
-                        DateTime.parse(state.expenses[index].transactionDate);
-                    return ListTile(
-                      title: Text(state.expenses[index].item),
-                      subtitle: Text(DateFormat("MMM, d, yyyy").format(date)),
-                      trailing:
-                          Text('₦${f.format(state.expenses[index].amount)}'),
-                    );
+                    if (index == state.response["expense"].length) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Spacer(),
+                            Text('Total : ₦${state.response["amount"]}'),
+                          ],
+                        ),
+                      );
+                    } else {
+                      var f = NumberFormat("#,##0.00", 'en_US');
+                      var date = DateTime.parse(
+                          state.response["expense"][index].transactionDate);
+                      return ListTile(
+                        title: Text(state.response["expense"][index].item),
+                        subtitle: Text(DateFormat("MMM, d, yyyy").format(date)),
+                        trailing: Text(
+                            '₦${f.format(state.response["expense"][index].amount)}'),
+                      );
+                    }
                   },
                   separatorBuilder: (context, index) => Divider(
                         color: secondaryColor,
                       ),
-                  itemCount: state.expenses.length);
+                  itemCount: state.response["expense"].length + 1);
             } else {
               return Container();
             }
