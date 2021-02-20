@@ -15,4 +15,4 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-path to apk : build/app/outputs/flutter-apk/app-release.apk
+path to apk : apk file/app-release.apk
